@@ -1,0 +1,9 @@
+{
+    "database": {
+        "name": "library.db",
+        "user": "None",
+        "password": "None",
+        "host": "None",
+        "port": "None"
+    }
+}
