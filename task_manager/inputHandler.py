@@ -6,7 +6,7 @@ def isNum(char):
         return False
     
 
-def handleDate(date):
+def handle_date(date):
     isCorrect = False
     while isCorrect == False:
         year = 0
@@ -60,7 +60,7 @@ def handleDate(date):
             date = input("Invalid Date Format. Please Use the format (YYY/MMM/DDD, HH:MM): ")
         elif(minutes<0 or minutes > 59 or hours < 0 or hours > 23 ):
             date = input("Wrong Time. Try Again!: ")
-        elif (month < 1 or month > 12 or day > daysInMonth[month-1]):
+        elif (month < 1 or month > 12 or day < 1 or day > daysInMonth[month-1]):
             date = input("Wrong Date. Try Again!: ")
         else:
             isCorrect = True
@@ -70,7 +70,7 @@ def handleDate(date):
         
    
 
-def handlePriority(priority):
+def handle_priority(priority):
     if (priority > 3):
         return 3
     elif (priority < 1):
