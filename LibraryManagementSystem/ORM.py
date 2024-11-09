@@ -43,11 +43,11 @@ class ORM:
         class_attributes = cls.__annotations__
 
         query_fields = cls._get_fields_query(class_attributes)
-        cls.CURSOR.execute(f"""CREATE TABLE IF NOT EXISTS {class_name} (
+        ORM.CURSOR.execute(f"""CREATE TABLE IF NOT EXISTS {class_name} (
                                  id INTEGER PRIMARY KEY AUTOINCREMENT,
                                 {query_fields}
                                )""")
-        cls.CONNECTION.commit()
+        ORM.CONNECTION.commit()
 
     @staticmethod
     def _migrate():
@@ -56,8 +56,8 @@ class ORM:
 
     @classmethod
     def fetch_object(cls: type, id: int) -> object:
-        cls.CURSOR.execute(f"SELECT * FROM {cls.__name__} WHERE id = ?", (id,))
-        record = cls.CURSOR.fetchone()
+        ORM.CURSOR.execute(f"SELECT * FROM {cls.__name__} WHERE id = ?", (id,))
+        record = ORM.CURSOR.fetchone()
 
         if record is None:
             return None
@@ -71,8 +71,8 @@ class ORM:
     @classmethod
     def get_objects(cls: type) -> list:
 
-        cls.CURSOR.execute(f"SELECT * FROM {cls.__name__}")
-        rows = cls.CURSOR.fetchall()
+        ORM.CURSOR.execute(f"SELECT * FROM {cls.__name__}")
+        rows = ORM.CURSOR.fetchall()
 
         objects = []
         for record in rows:
@@ -83,6 +83,10 @@ class ORM:
 
         return objects
     
+    @staticmethod
+    def migrate():
+        ORM.__init__()
+        ORM._migrate()
 
     def update(obj: object, field: str, value):
         obj.CURSOR.execute(f"UPDATE {obj.__class__.__name__} SET {field} = ? WHERE id = ?", (value, obj._id))
@@ -104,9 +108,8 @@ class ORM:
             ORM.CONNECTION.commit()
 
         except sqlite3.OperationalError as e:
-            print(f"Error: table {cls.__name__} does not exist")
-            print("Please make sure to migrate to the database")
-
-
+            print(e)
+            print(f"Error: table {self.__class__.__name__} does not exist")
+            print("Please make sure to run latest migration")
 
 
