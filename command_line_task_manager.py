@@ -85,7 +85,7 @@ def priority_validation(prio):
 def Add_task ():
     name = str((len(data)+1))
     desc = input("Please Enter theTask description: ")
-    desc = descrip_validation(desc)
+    desc  = descrip_validation(desc)
 
     prio = input("Please enter the Priority of your task(high ,medium , low): ")
     
