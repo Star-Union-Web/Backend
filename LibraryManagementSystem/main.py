@@ -8,9 +8,19 @@ class Book:
         self.is_borrowed = False
 
     def borrow(self):
+
+        if (self.is_borrowed):
+            print("This book is already borrowed")
+            return
+
         self.is_borrowed = True
 
     def return_book(self):
+
+        if not self.is_borrowed:
+            print("You don't have the book to return!")
+            return
+
         self.is_borrowed = False
 
 class Library:
@@ -77,7 +87,6 @@ class ILibrary:
     def save(self):
         self.library.save()
 
-
 class Interface:
     def msg(self, msg):
         print(msg)
@@ -97,7 +106,6 @@ class ActionChoice:
         while action < 1 or action > len(self.choices):
             action = int(input("Enter your choice: "))
             return self.actions[action-1]()
-
 
 def exit():
     return False
