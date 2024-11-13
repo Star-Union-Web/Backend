@@ -1,0 +1,1 @@
+[{"name": "products", "attributes": [{"name": "title", "type": "TEXT", "default": null, "required": false}, {"name": "price", "type": "FLOAT", "default": 0.0, "required": false}]}]
