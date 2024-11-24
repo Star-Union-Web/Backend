@@ -18,7 +18,8 @@ class DBManagerUI:
             print("4. Delete a record")
             print("5. Update a record")
             print("6. Query a record")
-            print("7. Exit")
+            print("7. Create Table")
+            print("8. Exit")
 
             choice = input("Please choose an option: ")
 
@@ -35,6 +36,8 @@ class DBManagerUI:
             elif choice == "6":
                 self.read_record_ui()
             elif choice == "7":
+                self.create_table_ui()
+            elif choice == "8":
                 print("Exiting...")
                 break
             else:
@@ -102,10 +105,20 @@ class DBManagerUI:
 
             print('-'*20)
 
+    def create_table_ui(self):
+        model = input("Enter model name: ")
+        self.db_manager.create_table(model)
+
     def create_record_ui(self):
         
         model_name = input("Enter model name: ")
+
+        if model_name not in self.db_manager.entities:
+            print("Model not found")
+            return
+
         record = {}
+        
         attributes = self.db_manager.entities[model_name].attributes
 
         for a in attributes.keys():
@@ -132,13 +145,42 @@ class DBManagerUI:
                 
                 it -= 1
 
-        print(record)
+        self.db_manager.create_record(model_name, record)
 
     def read_record_ui(self):
-        pass
+        model = input("Enter model name: ")
+        if model is not None:
+            print(self.db_manager.read_record(model))
 
     def update_record_ui(self):
-        pass
+        model = input("Enter model name: ")
+
+        if model not in self.db_manager.entities:
+            print("Model not found")
+            return
+
+        id = int(input("Enter id: "))
+
+        attributes = self.db_manager.entities[model].attributes
+        new_values = {}
+        for attribute in attributes:
+
+            inp = input(f"Enter {attribute} (Enter to skip): ")
+
+            if inp == "":
+                continue
+
+            if attributes[attribute].data_type == G_type.INT.value:
+                new_values[attribute] = int(inp)
+            elif attributes[attribute].data_type == G_type.FLOAT.value:
+                new_values[attribute] = float(inp)
+            elif attributes[attribute].data_type == G_type.TEXT.value:
+                new_values[attribute] = inp
+            elif attributes[attribute].data_type == G_type.RELATION.value:
+                new_values[attribute] = int(inp)
+                
+
+        self.db_manager.update_record(model, new_values, {"id": id})
 
     def delete_record_ui(self):
         pass

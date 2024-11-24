@@ -42,15 +42,33 @@ class DBManager:
                 for m in self.entities.keys()
             ], f)
 
+    def create_table(self, model_name: str):
+        if model_name not in self.entities:
+            print("Model not found")
+            return
+        
+        self.entities[model_name].create_table()
+
     def create_record(self, model : str, values : dict):
+        if model not in self.entities:
+            print("Model not found")
+            return
         
         self.entities[model].insert(values)
 
     def read_record(self, model : str, filter : dict = {}):
 
+        if model not in self.entities:
+            print("Model not found")
+            return
+
         return self.entities[model].fetch(filter)
     
     def update_record(self, model : str, values : dict, filter : dict = {}):
+
+        if model not in self.entities:
+            print("Model not found")
+            return
 
         if "id" in filter:
             self.entities[model].update_by_id(filter["id"], values)
@@ -58,6 +76,10 @@ class DBManager:
             self.entities[model].update(filter, values)
 
     def delete_record(self, model : str, id : int):
+        
+        if model not in self.entities:
+            print("Model not found")
+            return
         
         self.entities[model].delete_by_id(id)
 

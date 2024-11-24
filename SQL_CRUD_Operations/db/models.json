@@ -1,1 +1,1 @@
-[{"name": "products", "attributes": [{"name": "title", "type": "TEXT", "default": null, "required": false}, {"name": "price", "type": "FLOAT", "default": 0.0, "required": false}]}]
+[{"name": "products", "attributes": [{"name": "title", "type": "TEXT", "default": false, "required": false}, {"name": "price", "type": "FLOAT", "default": false, "required": false}]}, {"name": "Users", "attributes": [{"name": "name", "type": "TEXT", "default": true, "required": false}]}]
