@@ -1,6 +1,6 @@
 # API
 ## About
-allows you to interface with the api @ https://public.opendatasoft.com/api/explore/v2.1/catalog/datasets/global-shark-attack/records?limit=20&offset=2
+allows you to interface with the api @ https://public.opendatasoft.com/api/explore/v2.1/catalog/datasets/global-shark-attack/records?
 
 `fetch_data(pages, type="", country="", limit=100, offset=0)`: accepts 
 1 positional argument `pages`
