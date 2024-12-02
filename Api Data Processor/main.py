@@ -58,10 +58,3 @@ def mainMenu():
                 choice = input('Enter your choice : ')
 mainMenu()
 
-
-
-
-
-# egpCurrfromUSD = data['rates']['EGP']
-# AUDCurrfromUSD = data['rates']['AED']
-# print(float(AUDCurrfromUSD)/float(egpCurrfromUSD))
