@@ -1,4 +1,8 @@
-DJANGO/mega_test
 **/venv
-**/__pycache
+**/__pycache__
+.vscode
+DJANGO/mega_test
+API/dataLog.json
+API/app.log
+
 
