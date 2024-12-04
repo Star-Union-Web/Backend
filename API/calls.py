@@ -2,7 +2,7 @@ import requests, time, logging
 import json
 
 
-logging.basicConfig(filename='app.log', level=logging.DEBUG)
+logging.basicConfig(filename='./app.log', level=logging.DEBUG)
 
 
 
@@ -10,6 +10,7 @@ url = "https://public.opendatasoft.com/api/explore/v2.1/catalog/datasets/global-
 url_builder = "https://public.opendatasoft.com/api/explore/v2.1/catalog/datasets/global-shark-attack/records?"
 
 nonStrArgs = ["limit", "offset"]
+allowedArgs = ["country", "type"]
 
 
 
@@ -24,8 +25,8 @@ def build_url(props):
             built_url+=f"{key}={props[key]}"
             nonStrArgsCnt+=1
     for key in props.keys(): 
-        if props[key] != "" and key not in nonStrArgs:
-            print("3aasshhsshhss")
+        if props[key] != "" and key not in nonStrArgs and key in allowedArgs:
+            
             built_url+=(f"&refine={key}%3A{props[key]}")
     nonStrArgsCnt = 0
     print(props)
@@ -50,7 +51,7 @@ def fetch_decorator(func):
                 tries=5
                 return resp
             except:
-                print("bad internet bozo")
+                print("bad internet")
             tries+=1
         
         
