@@ -2,23 +2,26 @@
 ## About
 allows you to interface with the api @ https://public.opendatasoft.com/api/explore/v2.1/catalog/datasets/global-shark-attack/records?
 
-`fetch_data(pages, type="", country="", limit=100, offset=0)`: accepts 
-1 positional argument `pages`
-4 keyword arguments `type="", country="", limit=100, offset=0`
+- `fetch_data(pages=1, type="", country="", limit=100, offset=0)`: accepts 
 
-### `limit`
+5 keyword arguments `type="", country="", limit=100, offset=0, pages=1`
+
+- ### `limit`
 limit defines the max number of items in a single page
 
-### `offset`
+- ### `offset`
 defines the page we are requesting from the api
 
-### `type`
+- ### `type`
 defines type of incident
-### `country`
+- ### `country`
 defines country of the incident
 
+- ### pages
+defines how many pages the func should fetch
+
 `parse_data()`
-responsible for selecting only the supported attributes of the api to be stored later
+responsible for selecting only the supported attributes of the api to be stored later.
 
     
 
