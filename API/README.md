@@ -52,8 +52,13 @@ writes the data to json file `dataLog.json` page by page.
 
 ```Python
 for page in fetch_data(pages=5, limit=100, country="AUSTRALIA", type="Provoked"):
-    print(page.json()["results"])
+    if page.json()["results"] != "EmptyResponse":
+      print(parse_data(page.json()["results"]))
 ```
+
+## Error Handling
+if an exception occurs it is logged in app.log, furthermore the `fetch_data()` will provide an EmptyResponse Object containing a method `json()`
+which returns `{"results": "EmptyResponse"}`. 
 
 
     
