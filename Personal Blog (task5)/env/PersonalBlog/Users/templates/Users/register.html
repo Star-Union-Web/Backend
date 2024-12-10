@@ -1,0 +1,27 @@
+{% extends "Users/base.html" %}
+{% load filter %}
+
+{% block title %}Register{% endblock %}
+
+{% block body %}
+<h1>Register</h1>
+<form method="POST">
+
+    {% csrf_token %}
+    {% for field in form %}
+    <div data-mdb-input-init class="form-outline mb-4">
+      <label class="form-label" for="form3Example1cg">{{ field.label }}</label>
+        {{ field | add_class:"form-control form-control-lg" }}
+    </div>
+    {% endfor %}
+
+    <div class="d-flex justify-content-center">
+      <button  type="submit" data-mdb-button-init
+        data-mdb-ripple-init class="btn btn-success btn-block btn-lg gradient-custom-4 text-body">Register</button>
+    </div>
+
+    <p class="text-center text-muted mt-5 mb-0">Have already an account? <a href="{% url 'login' %}"
+        class="fw-bold text-body"><u>Login here</u></a></p>
+
+  </form>
+{% endblock %}
