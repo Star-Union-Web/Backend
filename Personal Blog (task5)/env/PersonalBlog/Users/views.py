@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from django.http import HttpResponse
+from django.http import HttpResponseForbidden
 from .forms import RegisterForm
 from django.contrib.auth import authenticate, login, logout
 from django.shortcuts import redirect
@@ -17,10 +17,9 @@ def login(request):
         user = authenticate(request, username=username, password=password)
         
         if user is not None:
-            login(request, user)
-            return HttpResponse('User logged in successfully')
+            login(request)
         else:
-            return HttpResponse('Invalid credentials')
+            return render(request, 'Users/login.html', {'error': 'Invalid credentials'})
 
 def logout(request):
     if request.user.is_authenticated:
