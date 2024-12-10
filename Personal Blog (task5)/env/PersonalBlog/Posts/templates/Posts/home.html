@@ -41,6 +41,9 @@
                         <div class="card-body" style="background-color: #f8f9fa;">
                             <!-- Post Content -->
                             <p class="card-text text-center mb-3">{{ post.content }}</p>
+                            {% if post.slug%}
+                            <p class="card-text mb-3"> URL: <a href="/{{post.slug}}">{{ post.slug }}</a></p>
+                            {% endif %}
                             <h6 class="card-subtitle mb-2 text-muted">By {{ post.author.username }}</h6>
                             <p class="card-text"><small class="text-muted">{{ post.created_at }}</small></p>
 
