@@ -2,16 +2,17 @@
 {% load filter %}
 
 {% block title %}Login{% endblock %}
+{% block card_title %}Login{% endblock %}
 
 {% block card_content %}
-<h1>Login</h1>
+
 <form method="POST">
 
     {% csrf_token %}
     {% for field in form %}
-    <div data-mdb-input-init class="form-outline mb-4">
-      <label class="form-label" >{{ field.label }}</label>
-        {{ field | add_class:"form-control form-control-lg" }}
+    <div class="form-outline mb-4 d-flex align-items-center w-100">
+      <label class="form-label me-2 w-25 font-monospace" >{{ field.label }}:</label>
+        {{ field | add_class:"form-control form-control-lg w-50" }}
     </div>
     {% endfor %}
 
@@ -21,12 +22,12 @@
     </div>
     {% endif %}
 
-    <div class="d-flex justify-content-center">
-      <button  type="submit" class="btn btn-success btn-lg text-white">Login</button>
-    </div>
-
-    <p class="text-center text-muted mt-5 mb-0">Don't have an account? <a href="{% url 'register' %}"
+    <p class="text-center text-muted mb-3">Don't have an account? <a href="{% url 'register' %}"
         class="fw-bold text-body"><u>Register here</u></a></p>
+
+        <div class="d-flex justify-content-center">
+          <button  type="submit" class="btn btn-success btn-lg text-white">Login</button>
+        </div>
 
   </form>
 {% endblock %}

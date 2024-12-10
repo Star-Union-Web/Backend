@@ -17,19 +17,20 @@
           </button>
           <div class="collapse navbar-collapse text-center" id="navbarNav">
             <ul class="navbar-nav ms-auto">
+              {% if user.is_authenticated %}
+              <li class="nav-item">
+                <a class="nav-link" href="{% url 'profile' %}">Hello! {{user.username}}</a>
+              </li>
+             {% else %}
+
+            <li class="nav-item">
+              <a class="nav-link btn btn-outline-secondary" href="{% url 'login' %}">Login</a>
+            </li>
+            {% endif %}
+
               <li class="nav-item">
                 <a class="nav-link" href="{% url 'posts' %}">Home</a>
               </li>
-              {% if user.is_authenticated %}
-                <li class="nav-item">
-                  <a class="nav-link" href="{% url 'profile' %}">{{user.username}}</a>
-                </li>
-               {% else %}
-
-              <li class="nav-item">
-                <a class="nav-link btn btn-outline-success" href="{% url 'login' %}">Login</a>
-              </li>
-              {% endif %}
             </ul>
           </div>
         </div>

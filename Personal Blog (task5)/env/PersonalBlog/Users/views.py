@@ -3,11 +3,15 @@ from django.http import HttpResponseForbidden
 from .forms import RegisterForm, LoginForm
 from django.contrib.auth import authenticate, login, logout
 from django.shortcuts import redirect
+from django.contrib.auth.models import User
 
 # Create your views here.
 
 def user_login(request):
     if request.method == 'GET':
+        if request.user.is_authenticated:
+            return redirect('profile')
+        
         form = LoginForm()
         return render(request, 'Users/login.html', {'form': form})
 
@@ -41,6 +45,9 @@ def user_logout(request):
 
 def register(request):
     if request.method == 'GET':
+        if request.user.is_authenticated:
+            return redirect('profile')
+        
         form = RegisterForm()
         return render(request, 'Users/register.html', {'form': form})
     
@@ -50,7 +57,7 @@ def register(request):
             form.save()
             return redirect('login')
         else:
-            return render(request, 'Users/register.html', {'form': form})
+            return render(request, 'Users/register.html', {'form': form, 'error': 'Invalid data'})
         
 def profile(request):
     if request.user.is_authenticated:

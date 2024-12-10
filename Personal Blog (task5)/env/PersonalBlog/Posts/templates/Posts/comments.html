@@ -1,0 +1,91 @@
+{% extends "Posts/base.html" %}
+
+{% block title %}Create Post{% endblock %}
+
+{% block body %}
+<div class="container py-5">
+    <div class="d-flex flex-column align-items-center">
+
+        {% if type != "Edit"%}
+        <!-- Blog Title Card -->
+        <div class="col-md-12 col-lg-8 mb-4">
+            <div class="card shadow-lg border-0 rounded-lg p-4 bg-light">
+                <h1 class="card-title mb-0 text-center">Comments Section</h1>
+                <div class="card-body">
+
+                </div>
+            </div>
+        </div>
+
+        <!-- Post Card -->
+        <div class="col-md-12 col-lg-8 mb-4">
+            <div class="card shadow-lg border-0 rounded-lg">
+                <div class="card-header bg-dark text-white text-center">
+                    <h5 class="card-title mb-0">{{ post.title }}</h5>
+                </div>
+                <div class="card-body" style="background-color: #f8f9fa;">
+                    <p class="card-text text-center mb-3">{{ post.content }}</p>
+                    <h6 class="card-subtitle mb-2 text-muted text-center">By {{ post.author.username }}</h6>
+                    <p class="card-text text-center"><small class="text-muted">{{ post.created_at }}</small></p>
+                </div>
+            </div>
+        </div>
+        {% endif %}
+
+
+        <!-- Create Comment Card -->
+        <div class="col-md-8 col-lg-6 mb-4">
+            <div class="card shadow-lg border-0 rounded-lg">
+                <div class="card-header bg-dark text-white text-center">
+                    <h5 class="card-title mb-0">{{type}} Comment</h5>
+                </div>
+                <div class="card-body" style="background-color: #f8f9fa;">
+                    <form method="POST">
+                        {% csrf_token %}
+                        <input type="hidden" name="post_id" value="{{ post_id }}">
+                        <textarea name="content" class="form-control form-control-lg mb-3" placeholder="New Comment">{{ comment.content }}</textarea>
+                        <div class="d-flex justify-content-center">
+                            <button type="submit" class="btn btn-dark btn-lg">Submit</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <!-- Comments Card -->
+        <div class="col-md-8 col-lg-6 mb-4">
+            <div class="card shadow-lg border-0 rounded-lg">
+                <div class="card-header bg-dark text-white ">
+                    <h5 class="card-title mb-0">Comments</h5>
+                </div>
+                <div class="card-body" style="background-color: #f8f9fa;">
+                    {% if comments %}
+                        {% for comment in comments %}
+                        <div class="card mb-3 shadow-sm border-0">
+                            <div class="card-body" style="background-color: #ffffff;">
+                                <p class="card-text">{{ comment.content }}</p>
+                                <p class="card-text mb-0"><small class="text-muted">{{ comment.created_at }}</small></p>
+                                <div class="d-flex justify-content-between">
+                                    <p class="card-text"><small class="text-muted">Created by: {{ comment.author.username }}</small></p>
+                                    {% if comment.author == user %}
+                                <div>
+                                    <form method="POST" action="{% url 'delete_comment' comment.id %}" class="d-inline">
+                                        {% csrf_token %}
+                                        <button type="submit" class="btn btn-danger btn-sm me-2">Delete Comment</button>
+                                    </form>
+                                    <a href="{% url 'edit_comment' comment.id %}" class="btn btn-primary btn-sm">Edit Comment</a>
+                                </div>
+                                {% endif %}
+                                </div>
+                            </div>
+                        </div>
+                        {% endfor %}
+                    {% else %}
+                        <p class="text-muted text-center">No comments yet. Be the first to comment!</p>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
