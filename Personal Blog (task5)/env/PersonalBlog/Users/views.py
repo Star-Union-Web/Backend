@@ -1,31 +1,42 @@
 from django.shortcuts import render
 from django.http import HttpResponseForbidden
-from .forms import RegisterForm
+from .forms import RegisterForm, LoginForm
 from django.contrib.auth import authenticate, login, logout
 from django.shortcuts import redirect
 
 # Create your views here.
 
-def login(request):
+def user_login(request):
     if request.method == 'GET':
-        return render(request, 'Users/login.html')
+        form = LoginForm()
+        return render(request, 'Users/login.html', {'form': form})
 
     if request.method == 'POST':
-        username = request.POST.get('username')
-        password = request.POST.get('password')
+        form = LoginForm(request.POST)
+
+        if form.is_valid():
+            username = form.cleaned_data['username']
+            password = form.cleaned_data['password']
+        else:
+            return render(request, 'Users/login.html', {'form': form})
 
         user = authenticate(request, username=username, password=password)
         
-        if user is not None:
-            login(request)
-        else:
+        if user is None:
             return render(request, 'Users/login.html', {'error': 'Invalid credentials'})
+        
+        login(request, user)
+        return redirect('posts')
 
-def logout(request):
+
+        
+
+def user_logout(request):
     if request.user.is_authenticated:
         logout(request)
+        return redirect('login')
     else:
-        return HttpResponse('User is not logged in')
+        return HttpResponseForbidden('You are not logged in')
 
 
 def register(request):
@@ -37,7 +48,7 @@ def register(request):
         form = RegisterForm(request.POST)
         if form.is_valid():
             form.save()
-            return HttpResponse('User created successfully')
+            return redirect('login')
         else:
             return render(request, 'Users/register.html', {'form': form})
         
@@ -45,5 +56,5 @@ def profile(request):
     if request.user.is_authenticated:
         return render(request, 'Users/profile.html', {'user': request.user})
     else:
-        return HttpResponse('User is not logged in')
+        return redirect('login')
         

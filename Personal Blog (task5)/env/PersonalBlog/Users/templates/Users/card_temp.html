@@ -1,0 +1,22 @@
+{% extends "Users/base.html" %}
+{% load filter %}
+
+
+{% block body %}
+
+<div class="container py-5">
+    <div class="row justify-content-center">
+        <div class="col-md-12 col-lg-8">
+            <div class="card shadow-lg border-0 rounded-lg">
+                <div class="card-body text-center">
+                    {% block card_content%}
+
+                    {% endblock %}
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+    
+{% endblock %}
