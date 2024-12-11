@@ -1,0 +1,61 @@
+{% extends 'base.html'  %}
+{% load static %}
+{% block content %}
+
+
+<main>
+
+
+   <!-- Search and Category Filter Section (Above Posts) -->
+   <div style="padding: 20px; margin-top: 60px; display: flex; justify-content: space-between; gap: 20px;">
+    <!-- Search Bar -->
+    <form method="GET" action="{% url 'categories' %}" class="search-form" style="flex: 1;">
+        <input type="text" name="search" placeholder="Search posts..." value="{{ request.GET.q }}" 
+            class="p-2 border rounded w-full"/>
+    </form>
+
+    <!-- Post Type Filter -->
+    <form method="GET" action="{% url 'status_filter' %}" class="filter-form" style="flex: 1;">
+        <select name="search1" class="p-2 border rounded w-full">
+            <option value="">All Types</option>
+            <option value="draft" {% if request.GET.search1 == 'draft' %}selected{% endif %}>Draft</option>
+            <option value="published" {% if request.GET.search1 == 'published' %}selected{% endif %}>Published</option>
+            <option value="rejected" {% if request.GET.search1 == 'rejected' %}selected{% endif %}>Rejected</option>
+        </select>
+        <!-- Add a Submit Button -->
+        <button type="submit" class="px-4 py-2 bg-blue-500 text-white rounded">Apply Filter</button>
+    </form>
+</div>
+
+
+<!-- Post Container -->
+<div style="display: flex; flex-wrap: wrap; justify-content: center; gap: 20px; padding: 20px;">
+    {% if data %}
+        {% for post in data %}
+            <div class="post">
+                <div class="post-card">
+                    <div class="author">{{ post.author }}</div>
+
+                    {% if post.image %}
+                        <div class="post-image">
+                            <img src="{{ post.image.url }}" alt="Post Image">
+                        </div>
+                    {% endif %}
+
+                    <div class="post-title">{{ post.title }}</div>
+                    <div class="upload-date">{{ post.created_at }}</div>
+                </div>
+                <div class="post-card-footer">
+                    <a href="{% url 'detailed_page' post.id %}" class="view-post-btn">View Post</a>
+                </div>
+            </div>
+        {% endfor %}
+    {% else %}
+        <h1 style="color: red;">No Posts exist</h1>
+    {% endif %}
+</div>
+</main>
+
+
+  <script src="{static 'JS/page.js'}"></script>
+  {% endblock %}

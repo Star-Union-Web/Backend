@@ -1,0 +1,168 @@
+body {
+    background-image: url('/static/images/background.jpg');
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+main {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 20px;
+    padding: 20px;
+    flex-grow: 1;
+}
+
+.post {
+    background: rgba(0, 0, 0, 0.7);
+    margin: 20px 0;
+    padding: 15px;
+    border-radius: 10px;
+    width: 100%;
+    max-width: 400px;
+    color: white;
+    text-align: center;
+    transition: transform 0.3s ease;
+}
+
+.post:hover {
+    transform: scale(1.05);
+    z-index: 1;
+}
+
+.post img {
+    width: 100%;
+    display: block;
+}
+
+/* Post Card Styling */
+.post-card {
+    background: rgba(0, 0, 0, 0.7);
+    padding: 15px;
+    border-radius: 10px;
+    width: 100%;
+    max-width: 400px;
+    color: white;
+    text-align: center;
+    margin-top: 20px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+}
+
+/* Author name styling */
+.author {
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+/* Post image styling */
+.post-image img {
+    width: 100%;
+    display: block;
+    border-radius: 10px;
+}
+
+/* Post title styling */
+.post-title {
+    font-size: 1.2rem;
+    font-weight: bold;
+    margin-top: 10px;
+}
+
+/* Upload date styling */
+.upload-date {
+    font-size: 0.9rem;
+    color: #ccc;
+    margin-top: 5px;
+}
+
+/* Container for the form */
+.container {
+    width: 100%;
+    max-width: 800px;
+    background: rgba(0, 0, 0, 0.7);
+    padding: 30px;
+    border-radius: 15px;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.4);
+}
+
+/* Form Inputs and Select Fields */
+input, textarea, select {
+    width: 100%;
+    padding: 12px;
+    margin-top: 8px;
+    background: rgba(255, 255, 255, 0.2);
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    color: white;
+}
+
+/* Focused Input / Textarea Field */
+input:focus, textarea:focus, select:focus {
+    outline: none;
+    border-color: #4CAF50;
+}
+
+/* Buttons */
+button {
+    padding: 12px 20px;
+    background: #2196F3;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+button:hover {
+    background-color: #1E88E5;
+}
+
+/* Button Cancel Style */
+#cancel-post {
+    background: #f44336;
+    margin-left: 10px;
+}
+
+#cancel-post:hover {
+    background-color: #e53935;
+}
+
+/* Adjusting the form layout */
+form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+h2 {
+    text-align: center;
+    margin-bottom: 20px;
+    font-size: 2rem;
+    color: white;
+}
+
+/* Optional: Add responsiveness */
+@media (max-width: 768px) {
+    .post-card {
+        width: 90%;
+    }
+}
+
+.custom-button {
+    background-color: #4CAF50; /* Green background */
+    color: white; /* White text */
+    border: none; /* No border */
+    padding: 10px 20px; /* Some padding */
+    text-align: center; /* Center the text */
+    font-size: 16px; /* Font size */
+    cursor: pointer; /* Pointer on hover */
+    border-radius: 5px; /* Rounded corners */
+  }
+
+  .custom-button:hover {
+    background-color: #45a049; /* Darker green on hover */
+  }
