@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]>      <html class="no-js"> <!--<![endif]-->
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title></title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        {% load static %}
+        <link rel="stylesheet" href="{% static "styles2.css" %}">
+    </head>
+    <body>
+        <table class="table">
+            <thead>
+              <tr>
+                <th scope="col">title</th>
+                <th scope="col">slug</th>
+                <th scope="col">content</th>
+                <th scope="col">author</th>
+                <th scope="col">created at</th>
+                <th scope="col">last updated</th>
+                <th scope="col">published status</th>
+              </tr>
+            </thead>
+            <tbody>
+            {% for x in all%}
+              <tr>
+                <td>{{x.title}}</td>
+                <td>{{x.slug}}</td>
+                <td>{{x.content}}</td>
+                <td>{{x.author}}</td>
+                <td>{{x.created_at}}</td>
+                <td>{{x.last_updated}}</td>
+                <td>{{x.published_status}}</td>
+                <td><a href = "delete/{{x.id}}"><button style = "background-color: blue ;">delete</button></a>
+                    <a href = "update/{{x.id}}"><button  style = "background-color: lightblue ; color : red">update</button></a></td>
+              </tr>
+              {%endfor%}
+            </tbody>
+          </table>
+          <a href = "{%url 'add'%}"><button>add</button></a>
+          <script src="" async defer></script>
+    </body>
+</html>

@@ -1,0 +1,53 @@
+*{
+    margin: 0 ; 
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body{
+    background-color: blueviolet;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin:20px ;
+    padding:40px 20px ; 
+}
+
+a{
+    text-decoration: none;
+}
+
+table{
+    /* background-color: black; */
+    border-radius: 8px;
+
+}
+td , th{
+    background-color: #c45fff8d;
+    border: 1px solid white;
+    padding:10px ;
+    border-radius: 8px;
+    color:white;
+}
+
+th{
+    background-color: rgb(4, 171, 255) ;
+}
+
+button{
+    padding: 20px;
+    margin: 20px ;
+    width: 250px ;
+    background-color: #0d6efd;
+    color: white;
+    border: transparent;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: 0.3s ease-in-out;
+}
+
+
+button:hover{
+    opacity:0.8 ;
+}
