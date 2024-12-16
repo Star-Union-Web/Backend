@@ -1,0 +1,1 @@
+changeProperty('--accent-color', 'teal');

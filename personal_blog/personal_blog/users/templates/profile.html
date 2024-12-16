@@ -1,0 +1,62 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+
+    <div class="container">
+        {% if readuser.id != none and readuser.id == user.id %}
+        <h1>User Settings</h1>
+        {% else %}
+        <h1>User Info</h1>
+        {% endif %}
+        <div class="divider"></div>
+        <h2>{{ readuser.username }}</h2>
+        
+        <img class="profile-img" src="{{ readuser.userprofile.image.url }}" alt="">
+        
+        
+        {% if readuser.id != none and readuser.id == user.id %}
+        <form method="POST" enctype="multipart/form-data">
+            {% csrf_token %}
+            {{ form.as_p }}
+            {{ pic_form.as_p }}
+            <button type="submit" class="btn">
+                Save Changes
+            </button>
+           
+        </form> 
+        <br>
+        <form method="POST" action="{% url 'logout' %}">
+            {%csrf_token%}
+            <button type="submit" class="btn">
+                Logout
+            </button>
+        </form>
+        {% endif %}
+        
+        <h1>Posts</h1>
+        <div class="divider"></div>
+        <ul>
+        {% for blog in blogs %}
+        <li>
+            <a href="{% url 'post-detail' blog.id %}">{{ blog.title }}</a>
+        </li>
+        {% endfor %}
+        </ul>
+        <h1>Comments</h1>
+        <div class="divider"></div>
+
+        <ul>
+            {% for comment in comments %}
+            <span>Date: {{comment.date_posted}}, Commented on Post: <a href="{% url 'post-detail' comment.posted_on.id %}">{{comment.posted_on.title}}</a></span>
+            <li>{{comment.content}}</li>
+            {% endfor %}
+
+        </ul>
+
+        <div class="dialogueBox" id="dBox1">
+            <p>Are you sure you want to delete?</p>
+        </div>
+
+    </div>
+{% endblock %}

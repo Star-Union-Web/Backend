@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="container">
+    <h1>{{ object.title }}</h1>
+    <div class="divider"></div>
+    <div class="horizontal-top">
+        <img src="{{ object.author.userprofile.image.url }}" class="profile-img" width="55px">
+    <p>Written By: <a href="{% url 'readprofile' object.author.id %}">{{ object.author.username }}</a> </p>
+    <p>Date: {{ object.date_posted }}</p>
+    </div>
+    <div class="divider"></div>
+    <p>{{ object.content }}</p>
+
+    <h2>Comments</h2>
+    <div class="divider"></div>
+    <form method="POST" action="{% url 'create_comment' object.id%}">
+        {% csrf_token %}
+        {{ comment_form.as_p }}
+        <button type="submit" class="btn">Post</button>
+    </form>
+    <ul>
+       
+    {% for comment in comments %}
+    <li>
+        <a href="{% url 'readprofile' comment.author.id %}">{{ comment.author }}</a>  : {{ comment.content }}
+    </li>
+    {% endfor %}
+    </ul>
+
+</div>
+{% endblock %}

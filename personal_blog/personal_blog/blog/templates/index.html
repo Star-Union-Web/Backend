@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<div class="container">
+    {% if user.is_authenticated %}
+    
+        <h1>Welcome 👋, {{ user.username }}</h1>
+        
+    
+    {% endif %}
+    <div class="horizontal-top">
+        <h2>Posts</h2>
+        {% if user.is_authenticated %}
+        <a href="{% url 'create' %}"><button class="squircle-btn"> + </button></a>
+        {% endif %}
+    </div>
+    <div class="divider"></div>
+    <br>
+    {% for blog in blogs %}
+    <div class="card2 post">
+        <h3>{{ blog.title }}</h3>
+        <div class="divider"></div>
+        <div class="details">
+            <p><img class="profile-img" src="{{ blog.author.userprofile.image.url }}" alt="" width="40px">Author:  <a href="{% url 'readprofile' blog.author.id %}">{{ blog.author }}</a></p>
+            <p>Date: {{ blog.date_posted}}</p>
+            <a href="{% url 'post-detail' blog.id %}">More...</a>
+        </div>
+        
+    </div>
+    <br>
+    <!-- <li>{{ blog }}</li> -->
+    {% endfor %}
+</div>
+
+{% endblock %}

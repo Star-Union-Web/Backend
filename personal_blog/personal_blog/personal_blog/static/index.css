@@ -1,0 +1,80 @@
+.card2 {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    align-items: baseline;
+   
+    
+}
+
+.warn {
+    border-radius: 8px;
+    background-color: rgb(255, 96, 96);
+    border: 1px solid rgb(255, 45, 45);
+
+}
+
+.yellow-btn {
+    background-color: var(--secondary-color);
+    color: black;
+    border: none;
+    border-radius: var(--ui-roundness);
+    padding: 8px;
+    font-size: 1rem;
+    margin: 8px;
+    box-shadow: 0 3px 6px 0 rgba(0,0,0,.14);
+
+}
+
+.yellow-btn:hover {
+    background-color: var(--secondary-color * 0.5);
+}
+
+.profile-img {
+    max-width: 150px;
+    max-height: 150px;
+    object-fit: cover;
+    border-radius: 100px;
+
+}
+
+.details p {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    align-items: center;
+    gap: 8px;
+    /* justify-content: center; */
+    /* background-color: blue; */
+
+}
+
+.squircle-btn {
+    background-color: var(--secondary-color);
+    color: black;
+    border: none;
+    padding: 8px;
+    border-radius: 25px;
+    font-size: 150%;
+    box-shadow: 0 3px 6px 0 rgba(0,0,0,.14);
+
+}
+
+.horizontal-top {
+    display: inline-flex;
+    flex-direction: row;
+    flex-basis: content;
+    align-items: center;
+    gap: 10px;
+}
+
+.horizontal-top button {
+    flex-basis: content;
+}
+
+.good-form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
