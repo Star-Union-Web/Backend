@@ -1,0 +1,82 @@
+*{
+    margin: 0 ; 
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin:20px ;
+    padding:40px 20px ; 
+    background-color: #FAF3E0; /* Light Cream */
+    font-family: Arial, sans-serif;
+    color: #4D4D4D; /* Slate Gray */
+    margin: 20px;
+}
+
+a{
+    text-decoration: none;
+}
+
+table{
+    /* background-color: black; */
+    border-radius: 8px;
+    border-collapse: collapse;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+
+}
+td{
+    background-color: #D5F0E3;
+    border: 1px solid #CCCCCC;
+    padding:10px ;
+    border-radius: 8px;
+    color: #333333; /* Charcoal Gray */
+}
+tr:nth-child(even) {
+    background-color: #D5F0E3; /* Light Mint */
+}
+tr:nth-child(odd) {
+    background-color: #FFFFFF; /* White */
+}
+th{
+    background-color: #2C786C ;
+    color:white;
+}
+table, th, td {
+    border: 1px solid #CCCCCC; /* Soft Gray */
+    border-radius: 8px;
+    padding : 10px ; 
+}
+button {
+    padding: 8px 12px;
+    margin: 4px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: bold;
+    color: #FFFFFF; /* White text for all buttons */
+    transition: 0.3s;
+}
+
+
+button:hover{
+    opacity:0.8 ;
+}
+/* Add Button Style: Blue */
+.btn-add {
+    background-color: #2196F3; /* Bright Blue */
+}
+
+.btn-add:hover {
+    background-color: #1976D2; /* Darker Blue on Hover */
+}
+
+/* Center the button below the table */
+.button-container {
+    text-align: center; /* Center align the button */
+    margin-top: 20px; /* Add some space above the button */
+}

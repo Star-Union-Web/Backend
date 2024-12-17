@@ -36,13 +36,17 @@
                 <td>{{x.created_at}}</td>
                 <td>{{x.last_updated}}</td>
                 <td>{{x.published_status}}</td>
-                <td><a href = "delete/{{x.id}}"><button style = "background-color: blue ;">delete</button></a>
-                    <a href = "update/{{x.id}}"><button  style = "background-color: lightblue ; color : red">update</button></a></td>
+                <td>
+                  <a href = "update/{{x.id}}"><button  style = "background-color: #4CAF50 ;">update</button></a>
+                  <a href = "delete/{{x.id}}"><button style = "background-color: #F44336 ;">delete</button></a>
+                </td>
               </tr>
               {%endfor%}
             </tbody>
           </table>
-          <a href = "{%url 'add'%}"><button>add</button></a>
+          <div class="button-container">
+          <a href = "{%url 'add'%}"><button class="btn btn-add">Add</button></a>
+          </div>
           <script src="" async defer></script>
     </body>
 </html>
