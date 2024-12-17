@@ -1,0 +1,58 @@
+{% extends "events/card_temp.html" %}
+
+{% block title %}Events{% endblock %}
+
+{% block card_title %}Events{% endblock %}
+
+{% block card_content %}
+
+
+{% for event in events %}
+<h3 class="card-title">{{event.title}}</h3>
+<p>{{event.description}}</p>
+<p>{{event.start_date}}</p>
+<p>Location: {{event.location}}</p>
+<p>End Date: {{event.end_date}}</p>
+<p>Organizer: {{event.organizer}}</p>
+<p>Capacity: {{event.capacity}}</p>
+
+<div>
+
+{% if user == event.organizer or perms.events.admin_event %}
+
+<a href="{% url 'view_event' event.id %}" class="btn btn-outline-primary">view</a>
+<a href="{% url 'update_event' event.id %}" class="btn btn-outline-secondary">Edit</a>
+
+<form action="{% url 'delete_event' event.id %}" method="post" style="display:inline;">
+    {% csrf_token %}
+    <button type="submit" class="btn btn-outline-danger">Delete</button>
+</form>
+
+{% else %}
+    {% if event.capacity %}
+        {% if user not in event.attendees.all %}
+        <form action="{% url 'register_event' event.id %}" method="post" style="display:inline;">
+            {% csrf_token %}
+            <button type="submit" class="btn btn-outline-success">Participate</button>
+        </form>
+        {% else %}
+        <form action="{% url 'delete_attendee' event.id %}" method="post" style="display:inline;">
+            {% csrf_token %}
+            <button type="submit" class="btn btn-outline-dark">Unregister</button>
+        </form>
+        {% endif %}
+
+    {% else %}
+        <button class="btn btn-outline-dark disabled" >Participate</button>
+
+    {% endif %}
+{% endif %}
+</div>
+{% empty %}
+<p>No Events Available at the moment</p>
+{% endfor %}
+
+            
+
+
+{% endblock %}
