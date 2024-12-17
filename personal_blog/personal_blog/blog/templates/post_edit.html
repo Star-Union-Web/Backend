@@ -2,14 +2,10 @@
 {% load static %}
 
 {% block content %}
-
-<form method="POST" class="good-form">
+<form method="POST">
     {% csrf_token %}
     {{ form.media }}
     {{ form.as_p }}
-    <button type="submit" class="btn">Post</button>
-
+    <button type="submit" class="btn">Submit Edits</button>
 </form>
-
 {% endblock %}
-

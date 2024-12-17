@@ -12,7 +12,7 @@
         <div class="divider"></div>
         <h2>{{ readuser.username }}</h2>
         
-        <img class="profile-img" src="{{ readuser.userprofile.image.url }}" alt="">
+        <img class="profile-img" src="{{ readuser.userprofile.image.url }}" width="150px">
         
         
         {% if readuser.id != none and readuser.id == user.id %}
@@ -36,27 +36,97 @@
         
         <h1>Posts</h1>
         <div class="divider"></div>
-        <ul>
+        
+        {% if not blogs %}
+        <p>This user has no posts</p>
+        {% endif %}
+        <br>
         {% for blog in blogs %}
-        <li>
-            <a href="{% url 'post-detail' blog.id %}">{{ blog.title }}</a>
-        </li>
+        
+            <div class="profile-post-cont">
+                <a href="{% url 'post-detail' blog.id %}">{{ blog.title }}</a>
+                {% if user.id == blog.author.id %}
+                    <a href="{% url 'update_post' blog.id %}">
+                        <button class="btn img-btn"><img src="{% static 'edit_ico_yellow.png' %}" width="30px"></button>   
+                    </a>
+                    
+                    <button onclick="mark_del('{{blog.id}}', 'post')" class="btn img-btn"> <img src="{% static 'delete_ico_yellow.png' %}" width="30px"> </button>
+                {% endif %}
+            </div>
+            <br>
+        
         {% endfor %}
-        </ul>
+        
         <h1>Comments</h1>
         <div class="divider"></div>
-
-        <ul>
+        {% if not comments %}
+        <p>This user has no comments</p>
+        {% endif %}
+            <br>
             {% for comment in comments %}
-            <span>Date: {{comment.date_posted}}, Commented on Post: <a href="{% url 'post-detail' comment.posted_on.id %}">{{comment.posted_on.title}}</a></span>
-            <li>{{comment.content}}</li>
+            <div class="profile-comment-replied">
+                <img src="{% static 'reply_ico.png' %}" width="20px">
+                <p>Commented on: <a href="{% url 'post-detail' comment.posted_on.id %}">{{comment.posted_on.title}}</a> @ {{comment.date_posted}}</p>
+            </div>
+            <!-- <span>Date: {{comment.date_posted}}, Commented on Post: </span> -->
+            
+                <div class="comment-block profile-comment-cont">
+                    "{{comment.content}}" 
+                    {% if user.id == comment.author.id %}
+                        <button onclick="mark_del('{{comment.id}}', 'comment')" class="btn img-btn"><img src="{% static 'delete_ico_yellow.png' %}" width="30px"></button>
+                    {% endif %}
+                </div>
+                <br>
+            
+                
             {% endfor %}
 
-        </ul>
+        
 
         <div class="dialogueBox" id="dBox1">
-            <p>Are you sure you want to delete?</p>
+            <div class="box">
+                <h3>Delete Comment?</h3>
+                <div class="divider"></div>
+                <p>Are you sure you want to delete this comment?</p>
+                <button onclick='proceed_deletion()'>yes</button>
+                <button onclick="closeDialogue('dBox1')">no</button>
+            </div>
         </div>
+
+        <div class="dialogueBox" id="dBox2">
+            <div class="box">
+                <h3>Delete Post?</h3>
+                <div class="divider"></div>
+                <p>Are you sure you want to delete this Post?</p>
+                <button onclick='proceed_deletion()'>yes</button>
+                <button onclick="closeDialogue('dBox2')">no</button>
+            </div>
+        </div>
+        {% block scripts %}
+            <script>
+                //openDialogue('dBox1');
+                    to_be_deleted = '';
+                    del_type = '';
+                function mark_del(idd, del_typee) {
+                    to_be_deleted = idd;
+                    del_type = del_typee
+                    if (del_type == "comment") {
+                        openDialogue("dBox1");
+                    } else if (del_type == "post") {
+                        openDialogue("dBox2");
+                    }
+                }
+
+                function proceed_deletion() {
+                    if (del_type == "comment") {
+                        url = `/delete_comment/${to_be_deleted}`;
+                    } else if (del_type == "post") {
+                        url = `/delete_post/${to_be_deleted}`;
+                    }
+                    window.location.href = url;
+                }
+            </script>
+        {% endblock %}
 
     </div>
 {% endblock %}

@@ -3,9 +3,50 @@
 {% load static %}
 
 {% block content %}
-<form method="POST">
-    {% csrf_token %}
-    {{ form.as_p }}
-    <button type="submit" class="btn">Sign Up</button>
-</form>
+<div class="container">
+    <div class="login-form-cont flexC">
+        
+        <form method="POST" class="register-form card">
+            {% csrf_token %}
+            <h1>Register</h1>
+            <div class="divider2"></div> 
+            {{ form.as_p }}
+            
+            <button type="submit" class="btn">Sign Up</button>
+        </form>
+        <p>Already have an account? <a href="{% url 'login' %}">login here.</a></p>
+    </div>
+</div>
+
+{% endblock %}
+
+{% block scripts %}
+    <script>
+        let fields = document.querySelectorAll('form input');
+        console.log(fields)
+        document.querySelector('form #id_username').setAttribute('placeholder', 'Username');
+        document.querySelector('form #id_password1').setAttribute('placeholder', 'Password');
+        document.querySelector('form #id_password2').setAttribute('placeholder', 'Confirm Password');
+        for (i=0; i<fields.length; i++) {
+            fields[i].classList.add('editText');
+            
+            //fields[i].setAttribute('placeholder', 'Username');
+        }
+        let spans = document.querySelectorAll('form span, label');
+        for (i=0; i<spans.length; i++) {
+            spans[i].style.display = "none";
+        }
+
+        let conditions = document.querySelectorAll('li');
+        for (i=0; i<conditions.length; i++) {
+            conditions[i].classList.add('conditions');
+        }
+
+        let errorslist = document.querySelector('.errorlist');
+        let errorlistChildren = errorslist.childNodes;
+        console.log(errorlistChildren);
+        for (i=0; i<errorlistChildren.length; i++) {
+            errorlistChildren[i].classList.add("error");
+        }
+    </script>
 {% endblock %}

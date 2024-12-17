@@ -327,9 +327,16 @@ body {
     place-items: center;
 }
 
+.flexC {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
 .card {
     border: 1px solid #aaaaaa;
-    border-radius: var(--ui-roundness);   
+    border-radius: var(--ui-roundness);
+    
 }
 
 .card2 {
@@ -443,3 +450,11 @@ body {
     background-color: rgb(207, 207, 207);
     height: 1px;
 }
+
+.divider2 {
+    background-color: rgb(207, 207, 207);
+    /* border: 1px solid rgb(207, 207, 207); */
+    height: 1px;
+    width: inherit;
+}
+

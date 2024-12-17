@@ -2,9 +2,23 @@
 {% load static %}
 
 {% block content %}
-<form method="POST">
-    {% csrf_token %}
-    {{ form.as_p }}
-    <button type="submit" class="btn">Login</button>
-</form>
+<div class="container">
+    <div class="login-cont">
+        
+        <div class="login-form-cont flexC">
+            <form method="POST" class="card login-form">
+                <h1>Login</h1>
+                <div class="divider2"></div>
+                {% csrf_token %}
+                {{ form.as_p }}
+                <button type="submit" class="btn">Login</button>
+            </form>
+            <p>Don't have an account? <a href="{% url 'register' %}">Register here</a></p>
+        </div>
+    </div>
+</div>
+
+{% endblock %}
+{% block scripts %}
+<script src="{% static 'mui.django.form.integrator.js' %}"></script>
 {% endblock %}

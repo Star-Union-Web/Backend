@@ -26,7 +26,7 @@ SECRET_KEY = 'django-insecure-!jma6fmdqu(cz#fy-yw1ba_8(+)bvz5shgol4ab2bb4nbx#-k7
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['127.0.0.1']
+ALLOWED_HOSTS = ['127.0.0.1', '192.168.1.6']
 
 
 STATIC_URL = '/static/'
@@ -49,6 +49,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'ckeditor',
     'blog', 
     'users',
 ]
