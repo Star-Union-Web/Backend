@@ -1,5 +1,5 @@
 {% extends "events/card_temp.html" %}
-
+{% load widget_tweaks %}
 
 {% block title %}Create Event{% endblock %}
 
@@ -7,10 +7,11 @@
 
 {% block card_content %}
 
-<form method="post" class="form-outline mb-4 d-flex flex-column align-items-center w-100">
+<!-- Event Creation Form -->
+<form method="post" class="form-outline flex-column align-items-center w-100">
     {% csrf_token %}
     {{ form }}
-    <button type="submit" class="btn btn-primary">Save</button>
+    <button type="submit" class="btn btn-primary mb-3">Create Event</button>
 </form>
 
 

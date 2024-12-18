@@ -1,50 +1,71 @@
-{% extends "events/card_temp.html" %}
+{% extends "events/base.html" %}
 
-{% block title %}Events{% endblock %}
+{% block title %}{{event.title}}{% endblock %}
 
-{% block card_title %}Events{% endblock %}
-
-{% block card_content %}
-
-<h3 class="card-title">{{event.title}}</h3>
-<p>Date: {{event.start_date.date}}-{{event.end_date}}</p>
-<p>From {{event.start_date.time}}</p>
-<p>Status: {{event.status}}</p>
-<p>Capacity: {{event.capacity}}</p>
-
-
-</div>
-</div>
-
-<div class="card shadow-lg border-0 rounded-lg mt-3">
-    <div class="card-header bg-dark text-white text-center">
-        <h3 class="card-title">Attendees</h3>
-    </div>
-        <div class="card content text-center">
-            <h5 class="card-title mt-3 mb-3">Number of Attendees: {{ attendees|length }}</h5>
-            <div class="row card-body">
-            {% for attendee in attendees %}
-                <div class="col-md-4 mb-3">
-                    <div class="card border-dark rounded-lg">
-                        <div class="card-header bg-dark text-white text-center">
-                            <h6 class="mb-0">Attendee: {{ attendee.user.name }}</h6>
-                        </div>
-                        <div class="card-body">
-                            <p>Email: {{ attendee.user.email }}</p>
-                            <p>Registeration Date:<br> {{ attendee.date.date }}</p>
+{% block body %}
+<div class="container py-5">
+    <!-- Centered row -->
+    <div class="row justify-content-center">
+        <!-- Column with responsive width -->
+        <div class="col-md-8 col-lg-8 col-xl-6">
+            <!-- Card with shadow and no border -->
+            <div class="card shadow-lg border-0 rounded-lg">
+                <!-- Dark header with white text -->
+                <div class="card-header bg-dark text-white text-center">
+                    <h3 class="card-title">Event</h3>
+                </div>
+                <!-- Card body with centered text -->
+                <div class="card-body text-center row justify-content-center">
+                    <!-- Event Details Section -->
+                    <div class="d-flex justify-content-center">
+                        <div class="text-start mb-3">
+                            <p class="mb-6"><strong>Description:</strong> {{ event.description }}</p>
+                            <small>
+                                <p class="mb-1"><strong>Location:</strong> {{ event.location }}</p>
+                                <p class="mb-1"><strong>Organizer:</strong> {{ event.organizer }}</p>
+                                <p class="mb-0"><strong>Capacity:</strong> {{ event.capacity }}</p>
+                                <p class="mt-2 mb-1"><strong>Start:</strong> {{ event.start_date|date:"Y/m/d" }} at {{ event.start_date|time:"H:i" }}</p>
+                                <p class="mb-1"><strong>Ends:</strong> {{ event.end_date|date:"Y/m/d" }} at {{ event.end_date|time:"H:i" }}</p>
+                            </small>
                         </div>
                     </div>
+                </div> <!-- End of Card Body -->
+            </div> <!-- End of Card -->
+        </div> <!-- End of Column -->
+
+        <div class="col-md-12 col-lg-12 col-xl-8 pt-5">
+            <!-- Attendees Section -->
+            <div class="card shadow-lg border-0 rounded-lg mt-3">
+                <!-- Attendees Header -->
+                <div class="card-header bg-dark text-white text-center">
+                    <h3 class="card-title">Attendees</h3>
                 </div>
-            {% endfor %}
+                <!-- Attendees Content -->
+                <div class="card-body text-center">
+                    <h5 class="card-title mt-3 mb-3">Attendees Count: {{ attendees|length }}</h5>
+                    <!-- Attendees Grid -->
+                    <div class="row">
+                        {% for attendee in attendees %}
+                            <!-- Individual Attendee Card -->
+                            <div class="col-md-4 col-sm-6 mb-3">
+                                <div class="card border-dark rounded-lg">
+                                    <div class="card-header bg-secondary text-white text-center">
+                                        <h6 class="mb-0">{{ attendee.user.name }}</h6>
+                                    </div>
+                                    <div class="card-body">
+                                        <p class="mb-1"><strong>Email:</strong> {{ attendee.user.email }}</p>
+                                        <p class="mb-1"><strong>Register ID:</strong> {{ attendee.id }}</p>
+                                        <p><strong>Registration:</strong> <br> {{ attendee.date.date | date:"Y/m/d" }} at: {{ attendee.date.time | time:"H:i" }}</p>
+                                    </div>
+                                </div>
+                            </div>
+                        {% endfor %}
+                    </div>
+                </div>
             </div>
-
-        </div>
-    </div>
+        </div> <!-- End of Column -->
+    </div> <!-- End of Row -->
 </div>
-        
-
-
-            
 
 
 {% endblock %}

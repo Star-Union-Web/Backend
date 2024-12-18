@@ -30,7 +30,6 @@ def user_login(request):
         
         if user is not None and user.check_password(password):
             login(request, user)
-            print(request.user.is_authenticated)
             return redirect('profile')
         
         return render(request, 'Users/login.html', {'error': 'Invalid credentials', 'form': form})
@@ -88,5 +87,10 @@ def admin_register(request):
 @login_required(login_url='login')
 def profile(request):
     if request.method == 'GET':
-        events = Event.objects.filter(organizer=request.user)
-        return render(request, 'Users/profile.html', {'events': events})
+        if request.user.has_perm('events.add_event'):
+            events = Event.objects.filter(organizer=request.user)
+            return render(request, 'Users/profile.html', {'events': events})
+        
+        else:
+            events = [attendee.event for attendee in request.user.attendee_set.all()]
+            return render(request, 'Users/profile.html', {'events': events})

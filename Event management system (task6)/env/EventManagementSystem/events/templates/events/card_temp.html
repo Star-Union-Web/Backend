@@ -3,14 +3,20 @@
 
 {% block body %}
 
+<!-- Main container with padding -->
 <div class="container py-5">
-    <div class="row justify-content-center ">
-        <div class="col-md-12 col-lg-8">
+    <!-- Centered row -->
+    <div class="row justify-content-center">
+        <!-- Column with responsive width -->
+        <div class="col-md-12 col-lg-12 col-xl-8">
+            <!-- Card with shadow and no border -->
             <div class="card shadow-lg border-0 rounded-lg">
+                <!-- Dark header with white text -->
                 <div class="card-header bg-dark text-white text-center">
                     <h3 class="card-title">{% block card_title%}{% endblock %}</h3>
                 </div>
-                <div class="card-body text-center">
+                <!-- Card body with centered text -->
+                <div class="card-body text-center row justify-content-center">
                     {% block card_content%}
 
                     {% endblock %}
@@ -20,5 +26,4 @@
         </div>
     </div>
 </div>
-    
 {% endblock %}

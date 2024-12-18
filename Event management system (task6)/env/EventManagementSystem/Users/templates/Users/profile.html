@@ -6,9 +6,11 @@
 
 {% block card_content %}
 
+<!-- User Profile Information -->
 <h3 class="card-title">{{user.name}}</h3>
 <p><i class="bi bi-envelope-fill"></i>{{user.email}}</p>
 
+<!-- Action Buttons -->
 <div class="d-flex justify-content-center mb-3 mt-3">
     {% if perms.events.add_event %}
     <a href="{% url 'create_event' %}" class="btn btn-outline-success mx-2">Create Event</a>
@@ -19,30 +21,62 @@
 </div>
 </div>
 
+<!-- Organized Events Section -->
+<!-- Organized Events Card -->
 <div class="card shadow-lg border-0 rounded-lg mt-3">
+    <!-- Card Header -->
     <div class="card-header bg-dark text-white text-center">
-        <h3 class="card-title">OrganizedEvents</h3>
+        {% if perms.events.add_event %}
+        <h3 class="card-title">Organized Events</h3>
+        {% else %}
+        <h4 class="card-title">Registered Events</h4>
+        {% endif %}
     </div>
+    <!-- Card Content -->
     <div class="card content text-center">
-        <h6 class="card-title mt-3">Number of Created Events: {{ events|length }}</h6>            
-<div class="row card-body">
-    {% for event in events %}
-    <div class="col-md-4 mb-3">
-        <div class="card bg-dark text-white text-center">
-            <div class="card-body">
-                <h5 class="card-title">Event: {{ event.title }}</h5>
-                <p>Capacity: {{event.capacity}}</p>
-                <a href="{% url 'view_event' event.id %}" class="btn btn-sm btn-outline-primary">View attendees</a>
-                <a href="{% url 'update_event' event.id %}" class="btn btn-sm btn-outline-secondary ">Edit</a>
-                <form action="{% url 'delete_event' event.id %}" method="post" style="display:inline;">
-                    {% csrf_token %}
-                    <button type="submit" class="btn btn-sm btn-outline-danger ">Delete</button>
-                </form>
+        <h6 class="card-title mt-3">Events Count: {{ events|length }}</h6>            
+
+        <!-- Events Grid -->
+        <div class="row card-body">
+            {% for event in events %}
+            <!--Event Cards -->
+            <div class="col-md-4 mb-3">
+                <div class="card bg-dark text-white text-center">
+                    <h5 class="card-header bg-primary">{{ event.title }}</h5>
+                    <div class="card-body">
+                        <!-- Event Details -->
+                        <div class="text-start mb-2">
+                                <p class="mb-1"><strong>Location:</strong> {{ event.location }}</p>
+                            <small>
+                                <p class="mt-2 mb-1"><strong>Start:</strong> {{ event.start_date|date:"Y/m/d" }} at {{ event.start_date|time:"H:i" }}</p>
+                                <p class="mb-1"><strong>Ends:</strong> {{ event.end_date|date:"Y/m/d" }} at {{ event.end_date|time:"H:i" }}</p>
+                                <p class="mb-1"><strong>Organizer:</strong> {{ event.organizer }}</p>
+                                <p class="mb-0"><strong>Capacity:</strong> {{ event.capacity }}</p>
+                            </small>
+                        </div>
+                        <!-- Event Buttons -->
+                        {% if perms.events.add_event %}
+                        <!-- Organizer/Admin Controls -->
+                        <div class="d-flex flex-row justify-content-center w-100">
+                            <a href="{% url 'view_event' event.id %}" class="btn btn-sm btn-outline-primary mx-1">view</a>
+                            <a href="{% url 'update_event' event.id %}" class="btn btn-sm btn-outline-secondary mx-1">Edit</a>
+                            <form action="{% url 'delete_event' event.id %}" method="post" style="display:inline;">
+                                {% csrf_token %}
+                                <button type="submit" class="btn btn-sm btn-outline-danger mx-1">Delete</button>
+                            </form>
+                        {% else %}
+                        <form action="{% url 'delete_attendee' event.id %}" method="post" style="display:inline;">
+                            {% csrf_token %}
+                            <button type="submit" class="btn btn-sm btn-outline-danger">Unregister</button>
+                        </form>
+
+                        {% endif %}
+
+                    </div>
+                </div>
             </div>
+            {% endfor %}
         </div>
-    </div>
-    {% endfor %}
-</div>
 
 
 

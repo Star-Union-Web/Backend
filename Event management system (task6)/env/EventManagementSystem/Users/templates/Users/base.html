@@ -1,41 +1,52 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{% block title %} {% endblock %}</title>
-    {% load bootstrap5 %}
-    {% bootstrap_css %}
-    {% bootstrap_javascript %}
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- Title block that will be overridden by child templates -->
+  <title>{% block title %} {% endblock %}</title>
+  <!-- Load Bootstrap 5 styles and scripts -->
+  {% load bootstrap5 %}
+  {% bootstrap_css %}
+  {% bootstrap_javascript %}
 </head>
 <body>
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-        <div class="container-fluid">
-          <a class="navbar-brand" href='{% url "events" %}'>Cairo Events</a>
-          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-          </button>
-          <div class="collapse navbar-collapse text-center" id="navbarNav">
-            <ul class="navbar-nav ms-auto">
-              {% if user.is_authenticated %}
-              <li class="nav-item">
-                <a class="nav-link" href="{% url 'profile' %}">Hello! {{user.name}}</a>
-              </li>
-             {% else %}
+  <!-- Navigation bar -->
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <div class="container-fluid">
 
+      <!-- Brand logo/link -->
+      <a class="navbar-brand" href='{% url "events" %}'>Cairo Events</a>
+
+      <!-- Hamburger menu for mobile -->
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <!-- Navigation items -->
+      <div class="collapse navbar-collapse text-center" id="navbarNav">
+
+        <ul class="navbar-nav ms-auto">
+          <!-- Conditional navigation based on authentication status -->
+          {% if user.is_authenticated %}
+            <li class="nav-item">
+              <a class="nav-link" href="{% url 'profile' %}">Hello! {{user.name}}</a>
+            </li>
+          {% else %}
             <li class="nav-item">
               <a class="nav-link btn btn-outline-secondary" href="{% url 'login' %}">Login</a>
             </li>
-            {% endif %}
+          {% endif %}
+          <li class="nav-item">
+            <a class="nav-link" href='{% url "events" %}'>Events</a>
+          </li>
+        </ul>
 
-              <li class="nav-item">
-                <a class="nav-link" href="">Home</a>
-              </li>
-            </ul>
-          </div>
-        </div>
-      </nav>
-    {% block body %} 
-    {% endblock %}
+      </div>
+    </div>
+  </nav>
+  <!-- Main content block that will be filled by child templates -->
+  {% block body %} 
+  {% endblock %}
 </body>
 </html>
