@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from django.http import HttpResponseForbidden
-from .forms import RegisterForm, LoginForm, forms
+from .forms import RegisterForm, LoginForm, AdminRegisterForm
 from django.contrib.auth import login, logout
 from django.shortcuts import redirect
 from .models import CustomUser as User
@@ -65,27 +65,24 @@ def register(request):
             return render(request, 'Users/register.html', {'form': form, 'error': 'Invalid data'})
 
 
-@permission_required('can_add_user')
+@permission_required('event.admin')
 def admin_register(request):
-    form = RegisterForm()
-    form.fields['user_type'] = forms.ChoiceField(
-        choices=[('user', 'User'), ('admin', 'Admin'), ('organizer', 'Organizer')],
-        widget=forms.Select(attrs={'class': 'form-control'}))
+    if request.method == 'GET':
+        form = AdminRegisterForm()
+        return render(request, 'Users/register.html', {'form': form})
     
     if request.method == 'POST':
-        form = RegisterForm(request.POST)
-        form.fields['user_type'] = forms.ChoiceField(
-            choices=[('user', 'User'), ('admin', 'Admin'), ('organizer', 'Organizer')],
-            widget=forms.Select(attrs={'class': 'form-control'}))
+        form = AdminRegisterForm(request.POST)
         
         if form.is_valid():
             user = form.save()
             user_type = form.cleaned_data['user_type']
             group = Group.objects.get(name=user_type)
             user.groups.add(group)
-            return HttpResponseForbidden('User created successfully')
+            return render(request, 'Users/register.html', {'form': form, 'success': 'User registered successfully'})
+        
+        return render(request, 'Users/register.html', {'form': form})
             
-    return render(request, 'Users/register.html', {'form': form})
 
             
 @login_required(login_url='login')

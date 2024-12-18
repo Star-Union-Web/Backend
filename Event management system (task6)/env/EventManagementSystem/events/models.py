@@ -2,7 +2,6 @@ from django.db import models
 from Users.models import CustomUser
 
 # Create your models here.
-
 class Event(models.Model):
     title = models.CharField(max_length=100)
     description = models.TextField()
@@ -28,4 +27,4 @@ class Attendee(models.Model):
     date = models.DateTimeField(auto_now_add=True)
     
     def __str__(self):
-        return f'{self.user} registered at {self.date.date()} for {self.event}'    
+        return f'{self.user} Registered at {self.date.date()}'    

@@ -10,8 +10,9 @@ from django.http import HttpResponseForbidden
 @permission_required('events.view_events', login_url='login')
 def get_events(request):  # this view is used to get all the events that are published
     if request.method == 'GET':
-        events = Event.objects.filter(status="published")
-        return render(request, 'events/events.html', {'events': events})
+        events = Event.objects.filter(status="published").prefetch_related('attendee_set')
+        user_events = [event for event in events if event.attendee_set.filter(user=request.user).exists()]
+        return render(request, 'events/events.html', {'events': events, 'user_events': user_events})
 
 @permission_required('events.view_event', login_url='login')  
 def get_event(request, event_id):  # this view is used to get a single event with more details to the organizer

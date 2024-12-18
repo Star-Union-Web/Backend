@@ -2,9 +2,21 @@
 {% block title %}Register{% endblock %}
 {% load widget_tweaks %}
 
+
+
+
 {% block card_title %}Register{% endblock %}
 
 {% block card_content %}
+
+{% if success %}
+<ul class="list-unstyled flex-column d-flex align-items-center">
+<div class="alert alert-success w-75" >
+  {{ success }}
+</div>
+</ul>
+{% endif %}
+
 <form method="POST">
 
     {% csrf_token %}

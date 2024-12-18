@@ -7,26 +7,42 @@
 {% block card_content %}
 
 <h3 class="card-title">{{event.title}}</h3>
-<p>{{event.description}}</p>
-<p>{{event.start_date}}</p>
-<p>Location: {{event.location}}</p>
-<p>End Date: {{event.end_date}}</p>
-<p>Organizer: {{event.organizer}}</p>
+<p>Date: {{event.start_date.date}}-{{event.end_date}}</p>
+<p>From {{event.start_date.time}}</p>
+<p>Status: {{event.status}}</p>
 <p>Capacity: {{event.capacity}}</p>
 
 
-<div class="card shadow-lg border-0 rounded-lg">
+</div>
+</div>
+
+<div class="card shadow-lg border-0 rounded-lg mt-3">
     <div class="card-header bg-dark text-white text-center">
         <h3 class="card-title">Attendees</h3>
+    </div>
         <div class="card content text-center">
-        <p>Number of Attendees: {{ attendees|length }}</p>
-        {% for attendee in attendees %}
-            <p>Attendee: {{ attendee }}</p>
-        {% empty %}
-            <p>No Attendees</p>
-        {% endfor %}
+            <h5 class="card-title mt-3 mb-3">Number of Attendees: {{ attendees|length }}</h5>
+            <div class="row card-body">
+            {% for attendee in attendees %}
+                <div class="col-md-4 mb-3">
+                    <div class="card border-dark rounded-lg">
+                        <div class="card-header bg-dark text-white text-center">
+                            <h6 class="mb-0">Attendee: {{ attendee.user.name }}</h6>
+                        </div>
+                        <div class="card-body">
+                            <p>Email: {{ attendee.user.email }}</p>
+                            <p>Registeration Date:<br> {{ attendee.date.date }}</p>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+            </div>
+
+        </div>
     </div>
 </div>
+        
+
 
             
 
