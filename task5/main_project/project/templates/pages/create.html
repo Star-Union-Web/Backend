@@ -12,7 +12,15 @@
         
         {% csrf_token %}
 
-        {{form}}
+        {% for field in form %}
+        {% if field.label != 'Author' %}
+        {{field.label}}
+        {{field}}
+        <br>
+        {% endif %}
+        
+        {% endfor %}
+        
 
         {% for message in messages %}
         <h6 class="alert">message</h6>

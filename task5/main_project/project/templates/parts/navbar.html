@@ -4,6 +4,13 @@
     <div class="container mx-auto flex items-center justify-between p-4">
       <h1 class="text-3xl font-bold text-white" style="font-family: 'Playwrite HU', cursive;">MyBlog</h1>
       <nav class="space-x-4">
+        {% if user.username %}
+        <h3>Hello,{{user.username}}</h3>
+        {% else %}
+        <h3>Hello, Everyone</h3>
+        {{user.username}}
+        {% endif %}
+        
         <a href="{%url 'home'%}" class="text-white text-lg sm:text-xl md:text-xl hover:text-yellow-300 transition-colors duration-300">Home</a>
         <a href="{%url 'create'%}" class="text-white text-lg sm:text-xl md:text-xl font-semibold hover:text-yellow-300 transition-colors duration-300">Create Post</a>
         <a href="{%url 'login'%}" class="text-white text-lg sm:text-xl md:text-xl hover:text-yellow-300 transition-colors duration-300">Login</a>

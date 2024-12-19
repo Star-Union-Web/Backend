@@ -5,6 +5,9 @@ from django.contrib import messages
 from django.contrib.auth import authenticate,login,logout  #login
 from django.contrib.auth.decorators import login_required  #for login restriction
 # Create your views here.
+
+
+
 def Login(request):
     if request.user.is_authenticated:
         return redirect('home')
@@ -19,14 +22,12 @@ def Login(request):
                 return redirect('home')
             
             else:
-                messages.info(request, "this account doesnt exist")
+                messages.error(request, "this account doesn't exist")
                 return redirect('login')
                 
             
             
         return render(request ,'pages/login.html')
-
-
 
 @login_required(login_url='login')
 def home(request):
@@ -38,7 +39,7 @@ def home(request):
 def detailed_page(request,post_id):
     post = get_object_or_404(Post, id=post_id) 
     
-    comments = Comment.objects.filter(post=post).order_by('-id')
+    comments = Comment.objects.filter(post=post).order_by('id')
 
     if request.method == 'POST':
         comment_form = CommentForm(request.POST or None)
@@ -51,8 +52,7 @@ def detailed_page(request,post_id):
         comment_form = CommentForm()
 
     return render(request, 'pages/detailed_page.html', {'post': post, 'comments': comments ,'comment_form':comment_form})
-    
-    
+       
 @login_required(login_url='login')
 def create(request):
     if request.method == 'POST':
@@ -62,26 +62,25 @@ def create(request):
         form = add_data(data=request.POST, files=request.FILES)
 
         if form.is_valid():
+            
             title = request.POST.get('title')
             image = request.FILES.get('image')
+            if image is None:
+                image = 'photos/default.jpg'
             slug = request.POST.get('slug')
             content = request.POST.get('content')
             published_status = request.POST.get('published_status')
 
-            
-            author = request.user  
-            
+            author = request.user
             
             post = Post.objects.create(title=title,author=author, content=content, image=image, slug=slug,published_status=published_status)
             post.save()
             return redirect('create')
     else:
+       
         form = add_data()
 
     return render(request, 'pages/create.html', {'form': form})
-
-
-
 
 def register(request):
     if request.user.is_authenticated:
@@ -146,7 +145,7 @@ def update(request, post_id):
         if form.is_valid():
             
             post = form.save(commit=False)
-            post.author = User.objects.get(username=request.user.username)  
+            post.author = request.user
             post.save()
             return redirect('detailed_page', post_id=post.id) 
 
@@ -164,3 +163,5 @@ def delete(request,post_id):
     
     return redirect('home')
     
+   
+    return render(request,'parts/navbar.html',{'name':request.user.username })

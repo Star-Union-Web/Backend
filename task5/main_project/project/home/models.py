@@ -17,7 +17,7 @@ class user_profile(models.Model):
 class Post(models.Model):
     published_choices = [('draft','draft'),('published','published'),('rejected','rejected')]
     title = models.CharField(max_length=100)
-    image = models.ImageField(upload_to='photos/%y/%m/%d')
+    image = models.ImageField(default='photos/default.jpg',upload_to='photos/%y/%m/%d')
     slug = models.SlugField(max_length=200,blank=True)
     content = models.TextField(max_length=500)
     author = models.ForeignKey(User,on_delete=models.CASCADE)
@@ -25,7 +25,7 @@ class Post(models.Model):
     updated_at = models.DateField(auto_now=True)
     published_status = models.CharField(max_length=30,choices=published_choices)
     def __str__(self):
-        return str(self.id)
+        return str(self.title)
     
 
 
