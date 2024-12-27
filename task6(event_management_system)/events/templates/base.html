@@ -1,0 +1,40 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="{% static 'materialUI.css' %}">
+    <link rel="stylesheet" href="{% static 'index.css' %}">
+</head>
+<body>
+    <div class="screen" id="main">
+        <div class="titleBar">
+            <a href="{% url 'home' %}"><p>Eventer</p></a>
+            <div class="right">
+                {% if user.is_authenticated %}
+                
+                
+                <form method="POST" action="{% url 'logout' %}">
+                    {%csrf_token%}
+                    <button type="submit" class="yellow-btn">
+                        Logout
+                    </button>
+                </form>
+                {% else %}
+                <a href="{% url 'userregister' %}"><button class="yellow-btn">Register</button></a> 
+                <a href="{% url 'login' %}"><button class="yellow-btn">Login</button></a>
+                {% endif %}
+            </div>
+        </div>
+
+        {% block content %}
+        {% endblock %}
+    </div>
+    <script src="{% static 'webUtils.js' %}"></script>
+    <script src="{% static 'index_mui_config.js' %}"></script>
+    {% block scripts %}
+    {% endblock %}
+</body>
+</html>

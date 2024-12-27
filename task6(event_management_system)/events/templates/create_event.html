@@ -1,0 +1,25 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <form method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+        {{ form }}
+        <button type="submit">Organize !</button>
+    </form>
+    
+    <script>
+        // this block gives proper date-time field type, since django uses text type input in this case  
+        let dt_start = document.querySelector('#id_start_date');
+        let dt_end = document.querySelector('#id_end_date');
+
+        dt_start.setAttribute('type', 'datetime-local');
+        dt_end.setAttribute('type', 'datetime-local');
+    </script>
+</body>
+</html>

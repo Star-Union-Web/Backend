@@ -1,0 +1,62 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+    <div class="event-image" id="event-image"></div>
+        <div class="container">
+            
+            <h1>{{ event.title }}</h1>
+            <div class="divider"></div>
+            <p>Organized By: {{ event.organizer }}</p>
+            <h3>Description</h3>
+            <div class="divider"></div>
+            <p>{{ event.description }}</p>
+            <h3>Details</h3>
+            <div class="hidden" id="hidden">
+                <p id="capacity">{{ event.capacity }}</p>
+                <p id="attendee_count"> {{ attendee_count }} </p>
+            </div>
+            <div class="divider"></div>
+            <div class="image-list-item"><img src="{% static 'location_ico.png' %}" width="20px"> <p>Location: {{ event.location }}</p></div>
+            <div class="image-list-item"><img src="{% static 'date_start_ico.png' %}" alt="" width="20px"> <p>Starts: {{ event.start_date }}</p></div>
+            <div class="image-list-item"><img src="{% static 'date_end_ico.png' %}" alt="" width="20px"><p>Ends: {{ event.end_date }}</p></div>
+            <div class="image-list-item"><img src="{% static 'user_ico.png' %}" alt="" width="20px"><p id="cap_info">Remaining Capacity: </p></div>
+            <a href="{% url 'event_register' event.id %}"><button class="btn">Attend Event</button></a>
+
+        </div>
+    
+{% endblock %}
+
+{% block scripts %}
+<style>
+    .image-list-item {
+        display: flex;
+        flex-direction: row;
+        /* justify-content: center; */
+        align-items: center;
+        gap: 8px;
+    }
+
+    #event-image {
+        width: 100%;
+        /* object-fit: cover; */
+        background-image: url("{{ event.image.url }}");
+        background-size: cover;
+        background-attachment: fixed;
+        background-position: center;
+        background-repeat: no-repeat;
+        
+        
+        height: 300px;
+    }
+
+    .hidden {
+        display: none;
+    }
+</style>
+<script>
+    attendee_count = document.querySelector('#attendee_count').innerText;
+    capacity = document.querySelector('#capacity').innerText;
+    document.querySelector('#cap_info').innerText+= capacity - attendee_count;
+</script>
+{% endblock %}

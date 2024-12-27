@@ -1,0 +1,61 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<div class="container">
+    <h1>Events</h1>
+    <div class="divider"></div>
+    <br>
+    <div class="grid4">
+        {% for event in events %}
+            <a href="{% url 'event_details'  event.id  %}" class="uLink">
+                <div class="card2 event-card">
+                    <img src="{{ event.image.url }}" alt="" class="event-image">
+                    <h3>{{ event.title}}</h3>
+                    <p>{{ event.location }}</p>
+                    <p>Organized By: {{ event.organizer }}</p>
+                </div>
+            </a>
+            
+        {% endfor %}
+    </div>
+</div>
+
+{% endblock %}
+{% block scripts %}
+<style>
+    .event-card {
+        /* max-width: 20%; */
+        /* width: 20px; */
+        /* width: 30%; */
+        height: 300px;
+        /* max-height: 300px; */
+        transition: all 0.3s ease-out;
+    }
+
+    .event-card:hover {
+        box-shadow: 3px 3px 20px #aaaaaa;
+        transform: scale(1.05);
+        filter: saturate(160%);
+    }
+
+    .event-image {
+        width: 100%;
+        /* max-width: 20vw; */
+        height: 40%;
+        aspect-ratio: 1/1;
+        object-fit: cover;
+        border-radius: 8px;
+        /* filter: saturate(90%); */
+        transition: all 0.3s ease-out;
+    }
+
+    .event-image:hover {
+        /* filter: saturate(150%); */
+    }
+
+    .grid3 {
+        gap: 17px;
+    }
+</style>
+{% endblock %}

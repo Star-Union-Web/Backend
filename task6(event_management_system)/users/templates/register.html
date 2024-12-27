@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block content %}
+<div class="container">
+    <div class="login-form-cont flexC">
+        
+        <form method="POST" class="register-form card">
+            {% csrf_token %}
+            <h1>Register</h1>
+            <div class="divider2"></div> 
+            {{ form.as_p }}
+           
+            <div class="chbxCont" style="display: flex;"> 
+                <p>Register as an organizer</p>
+                <input type="checkbox" name="user-role" id="user-role-checkbox">
+            
+               
+            </div>
+             <button type="submit" class="btn">Sign Up</button>
+        </form>
+        <p>Already have an account? <a href="{% url 'login' %}">login here.</a></p>
+    </div>
+</div>
+
+{% endblock %}
+
+{% block scripts %}
+<script src="{% static 'mui.django.form.integrator.js' %}"></script>
+{% endblock %}
