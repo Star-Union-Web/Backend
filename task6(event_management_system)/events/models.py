@@ -17,6 +17,6 @@ class Event(models.Model):
 
 class Attendee(models.Model):
     attendee = models.ForeignKey(User, on_delete=models.CASCADE)
-    event = models.ForeignKey(Event, on_delete=models.DO_NOTHING)
+    event = models.ForeignKey(Event, on_delete=models.CASCADE)
     reg_date = models.DateTimeField()
 

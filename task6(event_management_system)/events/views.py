@@ -1,7 +1,8 @@
 
+from multiprocessing import context
 from django.shortcuts import render
 from django.http import HttpResponse
-from .forms import EventCreationForm
+from .forms import EventCreationForm, EventEditForm
 from .models import Attendee, Event
 from django.views.generic import ListView, UpdateView, DetailView
 from django.contrib.auth.decorators import login_required
@@ -46,10 +47,56 @@ def create_event(request):
     return render(request, 'create_event.html', {'form': form})
 
 
+
+#class EventEditView(UpdateView):
+#    template_name='edit_event.html'
+#    model = Event
+#    fields = ['title', 'description', 'location', 'start_date', 'end_date', 'image', 'capacity']
 @login_required
 @allowed_user_types(['organizer'])
-def edit_event(request):
-    return HttpResponse("Edit")
+def my_events(request):
+    events = Event.objects.all().filter(organizer=request.user)
+    return render(request, 'my_events.html', {'events': events})
+    
+
+@login_required
+@allowed_user_types(['organizer'])
+def edit_event(request, **kwargs):
+    context = {}
+    event_id = kwargs.get('pk')
+    event = Event.objects.all().filter(id=event_id)[0]
+    form = EventEditForm(instance=event)
+    if request.method == 'POST':
+        form = EventEditForm(request.POST, request.FILES)
+        
+        if form.is_valid():
+            if request.user.username == event.organizer.username:
+
+                x = form.save(commit=False)
+                x.organizer=request.user
+                event.title = x.title
+                event.description = x.description
+                event.start_date = x.start_date
+                event.end_date = x.end_date
+                event.location = x.location
+                event.capacity = x.capacity
+
+                event.save()
+                return redirect('event_details', event_id)
+            else:
+                return HttpResponse("you can't edit this event")
+    return render(request, 'edit_event.html', {'form': form})
+
+@login_required
+@allowed_user_types(['organizer'])
+def delete_event(request, **kwargs):
+    event_id = kwargs.get('pk')
+    event = Event.objects.all().filter(id=event_id)[0]
+
+    if request.user.username == event.organizer.username:
+        event.delete()
+        #event.save()
+    return redirect('my_events')
 @login_required
 def register_for_event(request, **kwargs):
     if request.method == 'POST':

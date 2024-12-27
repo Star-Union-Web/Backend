@@ -18,11 +18,13 @@ from django.contrib import admin
 from django.urls import include, path
 from django.conf.urls.static import static
 from django.conf import settings
+from events.views import HomeListView
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('events/', include('events.urls')),
-    path('user/', include('users.urls'))
+    path('user/', include('users.urls')),
+    path('', HomeListView.as_view())
 ]
 
 if settings.DEBUG:

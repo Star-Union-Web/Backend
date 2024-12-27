@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+    <div class="event-image" id="event-image"></div>
+        <div class="container">
+            
+            <h1>my events</h1>
+            <div class="divider2"></div>
+            <br>
+            {% for event in events %}
+                <li>{{ event.title }}</li><a href="{% url 'edit_event' event.id %}">Edit</a><a href="{% url 'delete_event' event.id %}">Delete</a>
+
+            {% endfor %}
+        </div>
+    
+{% endblock %}
+
+{% block scripts %}
+
+{% endblock %}

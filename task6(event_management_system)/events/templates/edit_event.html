@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+    <div class="event-image" id="event-image"></div>
+        <div class="container">
+            
+            <form method="POST">
+                {% csrf_token %}
+                {{ form.as_p }}
+                <button type="submit">Edit</button>
+            </form>
+
+        </div>
+    
+{% endblock %}
+
+{% block scripts %}
+<script>
+    // this block gives proper date-time field type, since django uses text type input in this case  
+    let dt_start = document.querySelector('#id_start_date');
+    let dt_end = document.querySelector('#id_end_date');
+    
+    dt_start.setAttribute('type', 'datetime-local');
+    dt_end.setAttribute('type', 'datetime-local');
+</script>
+{% endblock %}
