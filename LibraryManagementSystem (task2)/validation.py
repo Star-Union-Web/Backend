@@ -36,7 +36,7 @@ class Validation:
 
         if due_date == None:
             print("Incorrect due date")
-            return Validation.get_valid_date()   
+            return Validation.get_valid_date(message)   
         else:
             return due_date
     
