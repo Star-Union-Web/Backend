@@ -36,8 +36,6 @@ Each project is implemented in its **own branch**:
 
 ## 👥 Contributors
 
-Each team member should add their name and their **branch link** below 👇  
-
 | Name | Branch Link |
 |------|--------------|
 | Seba Ibraheem | [https://github.com/Star-Union-Web/Backend/tree/seba_ibraheem](#) |
