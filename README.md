@@ -1,2 +1,41 @@
-# Backend
-Documentation: https://docs.google.com/document/d/1-mc5BbqBDr-F-v7UuVz131x03RLMOb0ikBs3L0-i-0A/edit?tab=t.0#heading=h.dijcrn28h0os 
+# 🧩 Backend Training Projects — Star Union
+
+This repository contains all the projects completed during the **Backend track** at **Star Union**.  
+Each project is implemented in a **separate branch**, showing the step-by-step progression from Python fundamentals to Django and Database Design.
+
+---
+
+## 📁 Branch Overview
+
+| Branch | Project | Description |
+|--------|----------|--------------|
+| **project-1-task-manager** | 🗂️ **Command-Line Task Manager** | A simple command-line task manager that allows adding, viewing, updating, and deleting tasks, with optional file-saving support. The goal was to practice **Python syntax**, **data handling**, and **basic functions**. |
+| **project-2-library-system** | 📚 **Library Management System** | A CLI-based system built using **OOP** principles. It includes `Book` and `Library` classes to manage books — allowing users to add, borrow, and return them, while persisting data with file handling. |
+| **project-3-random-api-fetch** | 🌐 **Random API Fetcher** | A project that fetches data from a **Random API** using Python (e.g., `requests` library) and displays the retrieved information. Focused on **API integration** and **data parsing**. |
+| **project-4-django-blog** | 📝 **Django Blog System** | The first hands-on experience with **Django Framework**, building a fully functional **Blog System** that supports creating, editing, and deleting posts. Emphasized understanding of the **MVC structure**, models, and views. |
+| **project-5-database-design** | 🧮 **Database Design & ERD** | A project focused on understanding **database design**, relationships (**one-to-many**, **many-to-many**), and creating a clear **ERD (Entity Relationship Diagram)** to represent data structure effectively. |
+
+---
+
+## 🧠 What We Learned
+- Writing clean and structured **Python** code.  
+- Applying **OOP** principles to organize projects.  
+- Integrating and working with **APIs**.  
+- Building complete web apps using **Django**.  
+- Understanding **Database Design** and **data relationships**.  
+
+---
+
+## 🚀 How to Explore the Projects
+Each project is implemented in its **own branch**:
+1. Go to the **Branches** section in this repository.  
+2. Select the branch for the project you want to explore.  
+3. Browse the code and implementation details.
+
+---
+
+## 🤝 Mentorship & Collaboration
+These projects were created as part of the **Star Union Backend Mentorship Program**,  
+where members applied what they learned through real projects, teamwork, and continuous improvement.
+
+---
