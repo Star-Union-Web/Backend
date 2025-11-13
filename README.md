@@ -34,8 +34,24 @@ Each project is implemented in its **own branch**:
 
 ---
 
+## 👥 Contributors
+
+Each team member should add their name and their **branch link** below 👇  
+
+| Name | Branch Link |
+|------|--------------|
+| Seba Ibraheem | [https://github.com/Star-Union-Web/Backend/tree/seba_ibraheem](#) |
+| Mahmoud Hesham | [https://github.com/Star-Union-Web/Backend/tree/MahmoudHesham](#) |
+| Omar Awad | [https://github.com/Star-Union-Web/Backend/tree/OmarAwad](#) |
+| Mohamed Hany | [https://github.com/Star-Union-Web/Backend/tree/mohamedhany](#) |
+| Ahmed Mustafa | [https://github.com/Star-Union-Web/Backend/tree/AhmedMustafa](#) |
+
+---
+
 ## 🤝 Mentorship & Collaboration
 These projects were created as part of the **Star Union Backend Mentorship Program**,  
 where members applied what they learned through real projects, teamwork, and continuous improvement.
 
 ---
+
+### 💡 Built with ❤️ by the Star Union Backend Team
